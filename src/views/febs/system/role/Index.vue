@@ -5,10 +5,10 @@
         <div class="app-container">
           <div class="filter-container">
             <el-input v-model="queryParams.roleName" :placeholder="$t('table.role.roleName')" class="filter-item search-item" />
-            <el-button class="filter-item" @click="search">
+            <el-button class="filter-item" type="primary" plain @click="search">
               {{ $t('table.search') }}
             </el-button>
-            <el-button class="filter-item" @click="reset">
+            <el-button class="filter-item" type="warning" plain @click="reset">
               {{ $t('table.reset') }}
             </el-button>
             <el-dropdown v-has-any-permission="['role:add','role:delete','role:export']" trigger="click" class="filter-item">
@@ -178,6 +178,8 @@ export default {
       this.role = { ...row }
       if (this.role.menuIds) {
         this.$refs.permsTree.setCheckedKeys(this.role.menuIds.split(','))
+      } else {
+        this.$refs.permsTree.setCheckedKeys([])
       }
     },
     singleDelete(row) {
@@ -265,6 +267,7 @@ export default {
       this.$refs.permsTree.setCheckedKeys([])
     },
     search() {
+      this.resetForm()
       this.fetch({
         ...this.queryParams,
         ...this.sort

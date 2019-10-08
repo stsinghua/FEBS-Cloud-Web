@@ -5,10 +5,10 @@
         <div class="app-container">
           <div class="filter-container">
             <el-input v-model="menuName" :placeholder="$t('table.menu.menuName')" class="filter-item search-item" />
-            <el-button class="filter-item" @click="search">
+            <el-button class="filter-item" type="primary" plain @click="search">
               {{ $t('table.search') }}
             </el-button>
-            <el-button class="filter-item" @click="reset">
+            <el-button class="filter-item" type="warning" plain @click="reset">
               {{ $t('table.reset') }}
             </el-button>
             <el-dropdown v-has-any-permission="['menu:add','menu:delete','menu:export']" trigger="click" class="filter-item">
@@ -108,10 +108,10 @@ export default {
       rules: {
         menuName: [
           { required: true, message: this.$t('rules.require'), trigger: 'blur' },
-          { min: 3, max: 10, message: this.$t('rules.range3to10'), trigger: 'blur' }
+          { min: 2, max: 10, message: this.$t('rules.range2to10'), trigger: 'blur' }
         ],
-        path: { max: 50, message: this.$t('rules.noMoreThan50'), trigger: 'blur' },
-        component: { max: 100, message: this.$t('rules.noMoreThan50'), trigger: 'blur' },
+        path: { max: 100, message: this.$t('rules.noMoreThan100'), trigger: 'blur' },
+        component: { max: 100, message: this.$t('rules.noMoreThan100'), trigger: 'blur' },
         perms: { max: 50, message: this.$t('rules.noMoreThan50'), trigger: 'blur' }
       }
     }
